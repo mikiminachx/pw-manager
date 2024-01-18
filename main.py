@@ -1,6 +1,7 @@
 import tkinter as tk
 from .src.gui import PasswordManagerApp
 
+# Run the scripts
 def main():
     root = tk.Tk()
     app = PasswordManagerApp(root)
