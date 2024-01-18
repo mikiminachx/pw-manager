@@ -17,6 +17,7 @@ class PasswordManager:
         return None
 
 # Test
-pm = PasswordManager()
-pm.add_password("example_service", "my_secured_password")
-print(pm.add_password("example_service"))
+if __name__ == "__main__":
+    pm = PasswordManager()
+    pm.add_password("example_service", "my_secured_password")
+    print(pm.add_password("example_service"))
