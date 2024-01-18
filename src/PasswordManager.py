@@ -1,5 +1,5 @@
-from ..database.encrypt import EncryptionManager
-from ..database.database_manager import DatabaseManager
+from ..Modules.EncryptionManager import EncryptionManager
+from ..Modules.DatabaseManager import DatabaseManager
 
 class PasswordManager:
     def __init__(self):
