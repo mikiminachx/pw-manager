@@ -28,7 +28,7 @@ class DatabaseManager:
 
     # Retrieving password
     def retrieve_password(self, service):
-        cursor = self.conn.execute("SELECT encrypted_password FROM password WHERE service=?", (service,))
+        cursor = self.conn.execute("SELECT encrypted_password FROM passwords WHERE service=?", (service,))
         row = cursor.fetchone()
         return row[0] if row else None
 

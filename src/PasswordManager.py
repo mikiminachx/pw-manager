@@ -1,5 +1,5 @@
-from ..modules.EncryptionManager import EncryptionManager
-from ..modules.DatabaseManager import DatabaseManager
+from modules.EncryptionManager import EncryptionManager
+from modules.DatabaseManager import DatabaseManager
 
 class PasswordManager:
     def __init__(self):
@@ -11,7 +11,7 @@ class PasswordManager:
         self.db_manager.insert_password(service, encrypted_password)
     
     def get_password(self, service):
-        encrypted_password = self.encryption_manager.retrieve_password(service)
+        encrypted_password = self.db_manager.retrieve_password(service)
         if encrypted_password:
             return self.encryption_manager.decrypt_password(encrypted_password)
         return None
@@ -20,4 +20,5 @@ class PasswordManager:
 if __name__ == "__main__":
     pm = PasswordManager()
     pm.add_password("example_service", "my_secured_password")
-    print(pm.add_password("example_service"))
+    retrieve_password = pm.get_password("example_service")
+    print(retrieve_password)

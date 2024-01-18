@@ -15,7 +15,8 @@ class EncryptionManager:
         else:
             key = Fernet.generate_key()
             with open(self.key_path, 'wb') as key_file:
-                return key
+                key_file.write(key)
+            return key
     
     def encrypt_password(self, password: str) -> str:
         return self.cipher_suite.encrypt(password.encode()).decode()
@@ -33,5 +34,5 @@ if __name__ == '__main__':
     test_password = "example_password"
     encrypted = em.encrypt_password(test_password)
     print(f'Encrypted: {encrypted}')
-    decrypted = em.decrypt_password(test_password)
-    print(f'Decrpted: {decrypted}')
+    decrypted = em.decrypt_password(encrypted)  # Decrypt the encrypted password
+    print(f'Decrypted: {decrypted}')
