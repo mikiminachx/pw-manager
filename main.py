@@ -1,8 +1,5 @@
 import tkinter as tk
-from .src.gui import PasswordManagerApp  # Import your GUI class
-# from password_manager import PasswordManager  # If needed
-# from database_manager import DatabaseManager  # If needed
-# from encryption_manager import EncryptionManager  # If needed
+from .src.gui import PasswordManagerApp
 
 def main():
     root = tk.Tk()
