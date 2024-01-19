@@ -2,11 +2,11 @@
 PWM is a password manager allows users to store their passwords in their own databases.
 <br></br>
 ## Table of Contents
-- [Features](Features)
-- [Tutorial](Tutorial)
-- [Installation](Installation)
-- [About the data](About-the-data)
-- [References](References)
+- [Features](#Features)
+- [Tutorial](#Tutorial)
+- [Installation](#Installation)
+- [About the data](#About-the-data)
+- [References](#References)
 ## Features
 - The data will be stored locally
 - Search for existing enquires
