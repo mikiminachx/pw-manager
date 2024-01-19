@@ -5,7 +5,7 @@ PWM is a password manager allows users to store their passwords in their own dat
 - [Features](Features)
 - [Tutorial](Tutorial)
 - [Installation](Installation)
-- [About the data/passwords](About-the-data/passwords)
+- [About the data](About-the-data)
 - [References](References)
 ## Features
 - The data will be stored locally
@@ -17,7 +17,7 @@ PWM is a password manager allows users to store their passwords in their own dat
 <br></br>
 ## Installation
 <br></br>
-## About the data/passwords
+## About the data
 The password itself will be encrypted when you store it. When you want to retrieve it, it will be decrypted. The data you stored will be kept in the database. The database is created by SQLite3, which means the keys are stored in the local computer instead of uploading to anywhere online. Of course, the developer myself does not have any access to the users' databases.
 <br></br>
 ## References
