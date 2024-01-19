@@ -30,21 +30,18 @@ class DatabaseManager:
     # Retrieving password
     def retrieve_password(self, service):
         cursor = self.conn.execute("SELECT encrypted_password FROM passwords WHERE service=?", (service,))
-        row = cursor.fetchone()
-        return row[0] if row else None
+        return cursor.fetchall()
     
     # Retrieving loginid
     def retrieve_loginid(self, service):
         cursor = self.conn.execute("SELECT loginid FROM passwords WHERE service=?", (service,))
-        row = cursor.fetchone()
-        return row[0] if row else None
+        return cursor.fetchall()
 
     # Retrieving all services
-    def retrieve_all_services(self):
+    def retrieve_all_details(self):
         with self.conn:
-            cursor = self.conn.execute("SELECT DISTINCT service FROM passwords")
-            services = [row[0] for row in cursor.fetchall()]
-            return services
+            cursor = self.conn.execute("SELECT service, loginid, encrypted_password FROM passwords")
+            return cursor.fetchall()
 
 # Testing
 if __name__ == "__main__":
@@ -54,7 +51,4 @@ if __name__ == "__main__":
     print("Password for 'example_service':", db_manager.retrieve_password("example_service"))
     print("Login ID for 'example_service':", db_manager.retrieve_loginid("example_service"))
 
-    print("All services:", db_manager.retrieve_all_services())
-
-
-
+    print("All services:", db_manager.retrieve_all_details())

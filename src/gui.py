@@ -45,7 +45,7 @@ class PasswordManagerApp:
         tk.Button(centre_frame, text="Get Password", command=self.get_password).grid(row=4, column=1, padx=10, pady=5)
 
         # Show All Passwords Button
-        tk.Button(centre_frame, text="Show Passwords", command=self.show_password_table).grid(row=5, column=0, columnspan=2, padx=10, pady=5)
+        tk.Button(centre_frame, text="Show All Passwords", command=self.show_all_passwords).grid(row=5, column=0, columnspan=2, padx=10, pady=5)
 
         # Signature Label
         tk.Label(centre_frame, text=signature, bg="#d3d3d3").grid(row=6, column=0, columnspan=2, padx=5, pady=5)
@@ -59,41 +59,44 @@ class PasswordManagerApp:
             messagebox.showinfo("Success", "Password added")
         else:
             messagebox.showwarning("Warning", "Please enter service, loginID and password")
+
     def get_password(self):
         service = self.service_entry.get()
         if service:
             password = self.pm.get_password(service)
             loginid = self.pm.get_loginid(service)
             if password and loginid:
-                self.show_password_table(service, loginid, password)
+                # Pass a list with a single tuple
+                self.show_details_in_table([(service, loginid, password)])
             else:
                 messagebox.showerror("Not Found", "Password and LoginID for the specified service not found")
         else:
             messagebox.showwarning("Warning", "Please enter a service to retrieve")
 
-    def populate_password_table(self, table):
-        for service in self.pm.get_all_service():
-            print(f"Service: {service}")  # For debugging
-            password = self.pm.get_password(service)
-            loginid = self.pm.get_loginid(service)
-            print(f"Login ID: {loginid}, Password: {password}")  # For debugging
-            table.insert("", tk.END, values=(service, loginid, password))
 
-    def show_password_table(self, service, loginid, password):
+    def show_all_passwords(self):
+        all_details = self.pm.get_all_details()
+        decrypted_details = [(service, loginid, self.pm.get_password(encrypted_password)) for service, loginid, encrypted_password in all_details]
+        self.show_details_in_table(decrypted_details)
+
+
+    def show_details_in_table(self, details):
         table_window = tk.Toplevel(self.master)
-        table_window.title(f"Password Details for {service}")
+        table_window.title("Password Details")
 
         # Setting up the Treeview widget
         columns = ("Service", "LoginID", "Password")
-        password_table = ttk.Treeview(table_window, columns=columns, show='headings')
-        password_table.heading("Service", text="Service")
-        password_table.heading("LoginID", text="LoginID")
-        password_table.heading("Password", text="Password")
-        password_table.column("Service", width=150)
-        password_table.column("LoginID", width=150)
-        password_table.column("Password", width=150)
+        details_table = ttk.Treeview(table_window, columns=columns, show='headings')
+        details_table.heading("Service", text="Service")
+        details_table.heading("LoginID", text="LoginID")
+        details_table.heading("Password", text="Password")
+        details_table.column("Service", width=150)
+        details_table.column("LoginID", width=150)
+        details_table.column("Password", width=150)
 
-        # Insert the specific service's details
-        password_table.insert("", tk.END, values=(service, loginid, password))
+        for service, loginid, password in details:
+            details_table.insert("", tk.END, values=(service, loginid, password))
+
+        details_table.pack(fill=tk.BOTH, expand=True)
+
         
-        password_table.pack(fill=tk.BOTH, expand=True)

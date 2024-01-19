@@ -6,10 +6,10 @@ class PasswordManager:
         self.db_manager = DatabaseManager()
         self.encryption_manager = EncryptionManager()
     
-    def get_all_service(self):
-        services = self.db_manager.retrieve_all_services()
-        print("Services retrieved:", services)
-        return services
+    def get_all_details(self):
+        detailsall_details = self.db_manager.retrieve_all_details()
+        print("Details retrieved:", detailsall_details)
+        return detailsall_details
 
     def add_password(self, service, loginid, password):
         encrypted_password = self.encryption_manager.encrypt_password(password)
@@ -39,12 +39,12 @@ if __name__ == "__main__":
     retrieved_loginid = pm.get_loginid("example_service")
     print(f"Retrieved LoginID for example_service: {retrieved_loginid}")
 
-    # Test: Get All Services
-    all_services = pm.get_all_service()
-    print("All services:", all_services)
+    # Test: Get All Details
+    all_details = pm.get_all_details()
+    print("All details:", all_details)
 
     # Display passwords for all services (Optional)
-    for service in all_services:
-        password = pm.get_password(service)
-        loginid = pm.get_loginid(service)
-        print(f"Service: {service}, Login ID: {loginid}, Password: {password}")
+    for detail in all_details:
+        service, loginid, encrypted_password = detail
+        decrypted_password = pm.get_password(service)
+        print(f"Service: {service}, Login ID: {loginid}, Password: {decrypted_password}")
