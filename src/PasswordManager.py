@@ -6,19 +6,45 @@ class PasswordManager:
         self.db_manager = DatabaseManager()
         self.encryption_manager = EncryptionManager()
     
-    def add_password(self, service, password):
+    def get_all_service(self):
+        services = self.db_manager.retrieve_all_services()
+        print("Services retrieved:", services)
+        return services
+
+    def add_password(self, service, loginid, password):
         encrypted_password = self.encryption_manager.encrypt_password(password)
-        self.db_manager.insert_password(service, encrypted_password)
-    
+        self.db_manager.insert_password(service, loginid, encrypted_password)
+
+    def get_loginid(self, service):
+        return self.db_manager.retrieve_loginid(service)
+
     def get_password(self, service):
         encrypted_password = self.db_manager.retrieve_password(service)
         if encrypted_password:
             return self.encryption_manager.decrypt_password(encrypted_password)
         return None
 
-# Test
 if __name__ == "__main__":
     pm = PasswordManager()
-    pm.add_password("example_service", "my_secured_password")
-    retrieve_password = pm.get_password("example_service")
-    print(retrieve_password)
+
+    # Test: Add Password
+    pm.add_password("example_service", "example_loginid", "my_secured_password")
+    print("Password added for example_service.")
+
+    # Test: Get Password for a Specific Service
+    retrieved_password = pm.get_password("example_service")
+    print(f"Retrieved Password for example_service: {retrieved_password}")
+
+    # Test: Get LoginID for a Specific Service
+    retrieved_loginid = pm.get_loginid("example_service")
+    print(f"Retrieved LoginID for example_service: {retrieved_loginid}")
+
+    # Test: Get All Services
+    all_services = pm.get_all_service()
+    print("All services:", all_services)
+
+    # Display passwords for all services (Optional)
+    for service in all_services:
+        password = pm.get_password(service)
+        loginid = pm.get_loginid(service)
+        print(f"Service: {service}, Login ID: {loginid}, Password: {password}")
