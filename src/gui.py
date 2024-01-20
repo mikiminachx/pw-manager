@@ -76,8 +76,7 @@ class PasswordManagerApp:
 
     def show_all_passwords(self):
         all_details = self.pm.get_all_details()
-        decrypted_details = [(service, loginid, self.pm.get_password(encrypted_password)) for service, loginid, encrypted_password in all_details]
-        self.show_details_in_table(decrypted_details)
+        return self.show_details_in_table(all_details)
 
 
     def show_details_in_table(self, details):

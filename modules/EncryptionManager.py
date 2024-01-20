@@ -39,7 +39,7 @@ class EncryptionManager:
             # Add handling for other specific exceptions if needed
             return None
 
-# Assuming this is in your EncryptionManager.py file
+# Test
 if __name__ == '__main__':
     em = EncryptionManager()
     test_password = "example_password"
