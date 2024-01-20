@@ -11,7 +11,7 @@ APP = ['main.py']
 DATA_FILES = []
 OPTIONS = {
     'argv_emulation': True,
-    'packages': ['sqlite3', 'cryptography', 'tkinter'],
+    'packages': ['sqlite3', 'cryptography', 'tkinter', 'cffi'],
     'includes': ['ctypes', '_ctypes'],
     'frameworks': ['/opt/homebrew/opt/libffi/lib/libffi.8.dylib']
 }
