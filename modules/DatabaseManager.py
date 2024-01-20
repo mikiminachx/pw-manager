@@ -7,6 +7,7 @@ class DatabaseManager:
         self.conn = None  # Initialize as None
         try:
             self.conn = self.create_connection()  # Attempt connection
+            self.create_table()
         except sqlite3.Error as e:
             logging.error("Database connection error: %s", e)
             raise  # Raise exception to handle error appropriately
