@@ -7,9 +7,9 @@ class PasswordManager:
         self.encryption_manager = EncryptionManager()
     
     def get_all_details(self):
-        detailsall_details = self.db_manager.retrieve_all_details()
-        print("Details retrieved:", detailsall_details)
-        return detailsall_details
+        all_details = self.db_manager.retrieve_all_details()
+        print("Details retrieved:", all_details)
+        return all_details
 
     def add_password(self, service, loginid, password):
         encrypted_password = self.encryption_manager.encrypt_password(password)
