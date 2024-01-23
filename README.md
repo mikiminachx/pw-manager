@@ -3,15 +3,19 @@ PasswordManager is a password manager allows users to store their passwords in t
 <br></br>
 A simple flowchart of how PasswordManager works:
 ```mermaid
-%%{init: {"flowchart": {"defaultRenderer": "elk"}} }%%
+%%{init: {"flowchart": {"htmlLabels": false}} }%%
 flowchart LR;
   A[PasswordManager];
   A-->B[Add Password];
   A-->C[Get Password];
   A-->D[Get All Passwords];
-  B-- Adding Data -->E[(Database)];
-  E-- Retrieving Data -->C;
-  E-- Retrieving Data -->D;
+  B-- Adding Data --->E[(Database)];
+  C-- Requesting Data --->E;
+  D-- Requesting Data --->E;
+  E-- Retrieving Data --->F[Specific Data];
+  E-- Retrieving Data --->G[All Data];
+  C-. Main Purpose .-F;
+  D-. Main Purpose .-G
 ```
 ## Table of Contents
 - [Features](#Features)
