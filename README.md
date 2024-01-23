@@ -45,6 +45,12 @@ Clone this repository to the local folder by running the following command to yo
 git clone https://github.com/mikiminachx/pw-manager.git
 cd pw-manager
 ```
+Or you can download the releases and unzip it.
+<br></br>
+Next, if you do not have the packages used in this application, you can simply install them by using this command:
+```
+pip install -r requirements.txt
+```
 ### Step 2: Start the application
 Start the application by running the following command:
 ```
