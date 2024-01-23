@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
-from src.PasswordManager import PasswordManager
+from lib.PasswordManager import PasswordManager
 
 class PasswordManagerApp:
     def __init__(self, master):

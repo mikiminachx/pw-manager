@@ -1,7 +1,7 @@
 from cryptography.fernet import Fernet
 import os
 from typing import Optional
-from modules.DatabaseManager import DatabaseManager
+from lib.DatabaseManager import DatabaseManager
 
 class EncryptionManager:
     def __init__(self, key_path: str = 'secret_key') -> None:
