@@ -24,7 +24,16 @@ flowchart LR;
 - Search for existing enquires
 - Easy to use
 - Exception handling
-<br></br>
+
+**Database Schema:**
+
+| Keys               	| Data Type     	|
+|--------------------	|---------------	|
+| service            	| TEXT NOT NULL 	|
+| loginid            	| TEXT NOT NULL 	|
+| encrypted_password 	| TEXT NOT NULL 	|
+
+
 ## Quick Start
 ### Step 1: Installation
 Clone this repository to the local folder by running the following command to your terminal:
