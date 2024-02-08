@@ -77,6 +77,11 @@ class DatabaseManager:
             cursor = self.conn.execute("SELECT service, loginid, encrypted_password FROM passwords")
             return cursor.fetchall()
 
+    # Delete selected service
+    def delete_service(self, service):
+        with self.conn:
+            cursor = self.conn.execute("DELETE FROM passwords WHERE service=?")
+       
 # Testing
 if __name__ == "__main__":
     db_manager = DatabaseManager()
@@ -86,3 +91,4 @@ if __name__ == "__main__":
     print("Login ID for 'example_service':", db_manager.retrieve_loginid("example_service"))
 
     print("All services:", db_manager.retrieve_all_details())
+    print("Deleted password", db_manager.delete_service("example_service"))

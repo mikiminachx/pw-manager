@@ -1,5 +1,5 @@
-from lib.EncryptionManager import EncryptionManager
-from lib.DatabaseManager import DatabaseManager
+from ..EncryptionManager import EncryptionManager
+from ..DatabaseManager import DatabaseManager
 
 class PasswordManager:
     def __init__(self):
@@ -28,6 +28,10 @@ class PasswordManager:
         else:
             return []
 
+    def delete_password(self, service):
+        self.db_manager.delete_service(service)
+        print(f"Password for {service} is deleted.")
+
 if __name__ == "__main__":
     pm = PasswordManager()
 
@@ -46,6 +50,10 @@ if __name__ == "__main__":
     # Test: Get All Details
     all_details = pm.get_all_details("example_service")
     print("All details:", all_details)
+
+    # Test: Delete passwords
+    delete_password = pm.delete_password("example_service")
+    print(f"Password for the selected password is deleted.")
 
     # Display passwords for all services (Optional)
     for service, loginid, decrypted_password in all_details:

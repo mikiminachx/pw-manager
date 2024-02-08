@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox, ttk
-from lib.PasswordManager import PasswordManager
+from ..lib.PasswordManager import PasswordManager
 
 class PasswordManagerApp:
     def __init__(self, master):
@@ -47,8 +47,12 @@ class PasswordManagerApp:
         # Show All Passwords Button
         tk.Button(centre_frame, text="Show All Passwords", command=self.show_all_passwords).grid(row=5, column=0, columnspan=2, padx=10, pady=5)
 
+        # Add delete button
+        tk.Button(self.master, text="Delete", command=self.delete_selected).pack(pady=5)
+
         # Signature Label
         tk.Label(centre_frame, text=signature, bg="#d3d3d3").grid(row=6, column=0, columnspan=2, padx=5, pady=5)
+
 
     def add_password(self):
         service = self.service_entry.get()
@@ -96,6 +100,17 @@ class PasswordManagerApp:
         for service, loginid, password in details:
             details_table.insert("", tk.END, values=(service, loginid, password))
 
+        details_table.bind("<Double-1", lambda event: self.on_double_click(event, details_table))
         details_table.pack(fill=tk.BOTH, expand=True)
 
-        
+    def on_double_click(self, event, details_table):
+        item = details_table.selection()[0]
+        service = details_table.item(item, "values")[0]
+        self.selected_service = service
+    
+    def delete_selected(self):
+        if hasattr(self, "selected_service"):
+            self.pm.delete_password(self.selected_service)
+            messagebox.showinfo("Success", "Password deleted")
+        else:
+            messagebox.showwarning("Warning", "Please select a row to delete.")

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from app.app import PasswordManagerApp
+from ..app import PasswordManagerApp
 
 class start_application:
     def main():
